@@ -1,0 +1,12 @@
+{
+  "name": "neil-landa-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Azure Functions backing neillanda.com (contact form, image delivery)",
+  "main": "src/functions/*.js",
+  "dependencies": {
+    "@azure/data-tables": "^13.3.2",
+    "@azure/functions": "^4.5.0",
+    "@azure/storage-blob": "^12.26.0"
+  }
+}

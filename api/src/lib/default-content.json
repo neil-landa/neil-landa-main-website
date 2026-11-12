@@ -1,0 +1,226 @@
+{
+  "brand": {
+    "name": "Neil Landa",
+    "logo": "/assets/lion.svg",
+    "ctaLabel": "Contact now",
+    "portalLabel": "Client portal",
+    "portalUrl": "https://billing.stripe.com/p/login/4gwaF60B515i5Wg144"
+  },
+  "seo": {
+    "title": "Neil Landa | IT, Azure & Website Development",
+    "description": "Neil Landa is a cloud and network security engineer in Bakersfield, California, providing professional IT, Microsoft Azure, and website development services."
+  },
+  "hero": {
+    "pill": "Cloud & network security engineer · Bakersfield, CA",
+    "lines": ["Secure IT.", "Solid Azure."],
+    "dimLine": "Serious websites.",
+    "lede": "I'm Neil Landa. I help businesses lock down their networks, build on Microsoft Azure, and launch websites that do real work.",
+    "primaryLabel": "Contact now",
+    "secondaryLabel": "See recent work",
+    "portrait": "",
+    "plateName": "Neil Landa",
+    "plateRole": "Cloud & Network Security Engineer",
+    "chips": ["Microsoft Azure", "Sophos Architect", "Security+", "Web development"]
+  },
+  "stats": [
+    { "value": "30", "suffix": "+", "label": "client organizations supported" },
+    { "value": "8", "suffix": "", "label": "industry certifications" },
+    { "value": "7", "suffix": "", "label": "client websites live today" },
+    { "value": "2020", "suffix": "", "label": "in professional IT since" }
+  ],
+  "marquee": ["Firewalls", "Microsoft Azure", "Entra ID", "Zero trust", "Intune", "SD-WAN", "Static Web Apps", "WordPress", "Network buildouts", "VPN"],
+  "statement": {
+    "eyebrow": "Why one engineer",
+    "text": "Most businesses juggle an IT provider, a cloud consultant, and a web agency. I do all three, so your firewall, your tenant, and your website are built to work together."
+  },
+  "services": {
+    "eyebrow": "Services",
+    "title": "Three disciplines.",
+    "titleDim": "One point of contact.",
+    "cards": [
+      {
+        "num": "01",
+        "title": "Professional IT",
+        "text": "Networks and security designed properly the first time, then kept healthy.",
+        "bullets": [
+          "Firewall design and deployment (Sophos)",
+          "Site-to-site VPN, SD-WAN, and VLAN segmentation",
+          "New office buildouts: switching, wireless, cabling",
+          "Zero-trust access with MFA and device compliance",
+          "DNS, DHCP, and day-to-day infrastructure support"
+        ],
+        "badge": "Quoted per project",
+        "highlight": false
+      },
+      {
+        "num": "02",
+        "title": "Microsoft Azure",
+        "text": "Cloud and identity environments that are secure by default and easy to run.",
+        "bullets": [
+          "Virtual networks, NSGs, and VPN gateways",
+          "Entra ID, Conditional Access, and hybrid identity",
+          "Microsoft Intune device management",
+          "Azure Virtual Desktop",
+          "Static Web Apps, Functions, and Storage"
+        ],
+        "badge": "Quoted per project",
+        "highlight": false
+      },
+      {
+        "num": "03",
+        "title": "Website development",
+        "text": "Fast, responsive sites and web apps built around what your business needs them to do.",
+        "bullets": [
+          "Custom-coded sites hosted on Azure",
+          "WordPress builds and ongoing maintenance",
+          "Forms, payments, registration, and staff portals",
+          "Analytics and search-engine setup included"
+        ],
+        "badge": "Projects from **$2,500**",
+        "highlight": true
+      }
+    ]
+  },
+  "work": {
+    "eyebrow": "Recent work",
+    "title": "Live sites.",
+    "titleDim": "Real businesses.",
+    "ctaTitle": "Yours could be next.",
+    "sites": [
+      {
+        "name": "New Opportunities S.L.S.",
+        "url": "https://nosls.com/",
+        "meta": "Supportive living services · Bakersfield, CA",
+        "tag": "Built on Azure",
+        "text": "A public website plus secure staff and consumer portals for scheduling, forms, and record-keeping.",
+        "image": "/api/img/work/new-opportunities-sls-1280.webp",
+        "imageSmall": "/api/img/work/new-opportunities-sls-640.webp"
+      },
+      {
+        "name": "Prince Michael Forever 15 Foundation",
+        "url": "https://pmforever15.com/",
+        "meta": "Nonprofit foundation",
+        "tag": "Built on Azure",
+        "text": "A foundation website with event registration, online donations, and an admin portal for the team.",
+        "image": "/api/img/work/pmforever15-1280.webp",
+        "imageSmall": "/api/img/work/pmforever15-640.webp"
+      },
+      {
+        "name": "The Kingdom Contractors",
+        "url": "https://thekingdomcontractors.com/",
+        "meta": "Residential construction · Central Coast, CA",
+        "tag": "",
+        "text": "Construction, remodels, and hardscape projects, presented with a clear path to a quote.",
+        "image": "/api/img/work/kingdom-contractors-1280.webp",
+        "imageSmall": "/api/img/work/kingdom-contractors-640.webp"
+      },
+      {
+        "name": "Cash Flow Consulting",
+        "url": "https://cashflowc.com/",
+        "meta": "Accounting · CA, NV & UT",
+        "tag": "",
+        "text": "A professional accounting firm serving individuals and businesses across three states.",
+        "image": "/api/img/work/cash-flow-consulting-1280.webp",
+        "imageSmall": "/api/img/work/cash-flow-consulting-640.webp"
+      },
+      {
+        "name": "M&M Hauling",
+        "url": "https://mandmhauling.com/",
+        "meta": "Trucking & logistics",
+        "tag": "",
+        "text": "An established trucking brand focused on fleet management and logistics.",
+        "image": "/api/img/work/mm-hauling-1280.webp",
+        "imageSmall": "/api/img/work/mm-hauling-640.webp"
+      },
+      {
+        "name": "Elite Foam Products",
+        "url": "https://elitefoamandpackaging.com/",
+        "meta": "Architectural foam · North Las Vegas, NV",
+        "tag": "",
+        "text": "Architectural casting, foam cutting and coating, and packaging solutions.",
+        "image": "/api/img/work/elite-foam-packaging-1280.webp",
+        "imageSmall": "/api/img/work/elite-foam-packaging-640.webp"
+      },
+      {
+        "name": "Great Texas Air",
+        "url": "https://greattexasair.com/",
+        "meta": "HVAC · Dallas–Fort Worth, TX",
+        "tag": "",
+        "text": "HVAC repair, installation, and maintenance with fast paths to book service.",
+        "image": "/api/img/work/great-texas-air-1280.webp",
+        "imageSmall": "/api/img/work/great-texas-air-640.webp"
+      }
+    ]
+  },
+  "about": {
+    "eyebrow": "About",
+    "title": "An engineer first.",
+    "titleDim": "A vendor second.",
+    "paragraphs": [
+      "I'm a cloud and network security engineer based in Bakersfield, California. My day-to-day is designing and deploying enterprise-grade firewall environments, zero-trust network architectures, and hybrid cloud solutions. I've done that across more than 30 client organizations in both managed-service and corporate IT settings.",
+      "I started out building networks from the ground up for a fast-growing company: firewalls, switching, wireless, cabling, and workstations at every new office. Along the way I began building websites for local businesses, and that side of the work grew into full web applications running on Azure.",
+      "That mix is the point. The person who builds your website also understands your DNS, your email security, and your identity setup. You deal with me directly, from the first call to long after launch."
+    ],
+    "buttons": [
+      { "label": "View my résumé", "url": "https://resume.neillanda.com/" },
+      { "label": "LinkedIn", "url": "https://www.linkedin.com/in/neillanda" }
+    ],
+    "certsTitle": "Certifications",
+    "certs": [
+      { "issuer": "Microsoft", "name": "AZ-900 Azure Fundamentals" },
+      { "issuer": "Microsoft", "name": "SC-900 Security, Compliance & Identity" },
+      { "issuer": "AWS", "name": "Certified Cloud Practitioner" },
+      { "issuer": "CompTIA", "name": "Security+" },
+      { "issuer": "CompTIA", "name": "Network+" },
+      { "issuer": "Sophos", "name": "Firewall Architect" },
+      { "issuer": "Sophos", "name": "Firewall Engineer" },
+      { "issuer": "Sophos", "name": "Firewall Technician" }
+    ]
+  },
+  "process": {
+    "eyebrow": "How it works",
+    "title": "First call to launch.",
+    "titleDim": "No surprises.",
+    "steps": [
+      { "num": "01", "title": "Talk", "text": "Send the form below. We'll have a short call about what you need and what's in the way." },
+      { "num": "02", "title": "Scope", "text": "You get a written scope, a timeline, and a quote before any work starts." },
+      { "num": "03", "title": "Build", "text": "I do the work and keep you posted, with review points so nothing is a surprise." },
+      { "num": "04", "title": "Launch & support", "text": "We go live together, and I stay available for maintenance and changes." }
+    ]
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "title": "Questions.",
+    "titleDim": "Answered.",
+    "intro": "Don't see yours?",
+    "introLink": "Ask me directly.",
+    "items": [
+      { "q": "How much does a website cost?", "a": "Pricing depends on complexity, deadline, and scope. The minimum engagement fee for professional website services is **$2,500 USD**. Tell me about your project and I'll send you a quote." },
+      { "q": "How are IT and Azure services priced?", "a": "IT and Azure work is quoted per project or as an ongoing arrangement, depending on what you need. Use the contact form to describe your environment and goals, and I'll follow up with options." },
+      { "q": "What is your average timeframe?", "a": "Most websites take one to two months. Small sites can be done in a few weeks. Larger builds with portals, payments, or integrations take longer, and you'll get a timeline with your quote." },
+      { "q": "How do you build your websites?", "a": "It depends on the job. Many of my recent sites are custom-coded and hosted on Microsoft Azure, which makes them fast, secure, and inexpensive to run. When a client needs to edit content often or run an online store, WordPress is still a great fit, and I build with that too." },
+      { "q": "Do you do SEO?", "a": "Every website ships with Google Analytics and Google Search Console set up at no extra charge, and I submit your business to Google Business Profile. Sites are built to load quickly and follow search-engine best practices." },
+      { "q": "Who are your ideal clients?", "a": "Small to medium-sized businesses and nonprofits that need a new website, an upgrade to their current one, or reliable help with their IT and cloud environment." },
+      { "q": "Do you maintain existing websites?", "a": "Yes. I take on and maintain websites I didn't originally build, including WordPress sites, and I can migrate them to faster, more secure hosting when it makes sense." },
+      { "q": "What if I'm unhappy with the work?", "a": "I work through review points and revisions so you see progress early and often, and we keep going until it's right. Because of the custom nature of the work, I don't offer refunds." }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Contact now",
+    "lines": ["Like what", "you see?"],
+    "dimLine": "Let's talk.",
+    "text": "Tell me what you're working on and I'll reply personally.",
+    "points": [
+      "Website projects start at $2,500",
+      "IT and Azure work quoted to fit",
+      "Based in Bakersfield, CA, working with clients nationwide"
+    ],
+    "portalText": "Existing client?",
+    "portalLinkLabel": "Open the client portal",
+    "submitLabel": "Send message"
+  },
+  "footer": {
+    "giant": "NEIL LANDA",
+    "copyright": "Neil Landa. All rights reserved."
+  }
+}

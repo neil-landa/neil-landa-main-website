@@ -1,0 +1,30 @@
+{
+  "trailingSlash": "auto",
+  "platform": { "apiRuntime": "node:20" },
+  "routes": [
+    { "route": "/.auth/login/aad", "statusCode": 404 },
+    { "route": "/.auth/login/twitter", "statusCode": 404 },
+    { "route": "/.auth/login/x", "statusCode": 404 },
+    { "route": "/login", "redirect": "/.auth/login/github?post_login_redirect_uri=/admin/", "statusCode": 302 },
+    { "route": "/logout", "redirect": "/.auth/logout?post_logout_redirect_uri=/", "statusCode": 302 },
+    { "route": "/admin", "redirect": "/admin/", "statusCode": 301 },
+    { "route": "/admin/*", "allowedRoles": ["authenticated"], "headers": { "Cache-Control": "no-store", "X-Robots-Tag": "noindex, nofollow" } },
+    { "route": "/api/manage/*", "allowedRoles": ["authenticated"] },
+    { "route": "/README.md", "statusCode": 404 },
+    { "route": "/wp-admin*", "redirect": "/", "statusCode": 301 },
+    { "route": "/wp-login.php", "redirect": "/", "statusCode": 301 },
+    { "route": "/login-admin*", "redirect": "/", "statusCode": 301 },
+    { "route": "/assets/*", "headers": { "Cache-Control": "public, max-age=0, must-revalidate" } }
+  ],
+  "responseOverrides": {
+    "401": { "redirect": "/.auth/login/github?post_login_redirect_uri=/admin/", "statusCode": 302 },
+    "404": { "rewrite": "/404.html", "statusCode": 404 }
+  },
+  "globalHeaders": {
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "X-Frame-Options": "DENY",
+    "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+    "Content-Security-Policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'self'; frame-ancestors 'none'"
+  }
+}
