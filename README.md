@@ -43,7 +43,7 @@ Every save also keeps a dated backup copy (the newest 40) in the `sitedata` cont
 | Path | What it is |
 |---|---|
 | `index.html`, `404.html` | The public pages. `index.html` holds the built-in default text, which saved content replaces on load |
-| `assets/` | `site.css`, `site.js`, `boot.js`, the lion logo (`lion.svg`, `favicon.svg`), and `vendor/lenis.min.js` (smooth scrolling, MIT) |
+| `assets/` | `site.css`, `site.js`, `boot.js`, the lion logo (`lion.svg`, `favicon.svg`, `apple-touch-icon.png`), `og.jpg` (the 1200×630 picture shown when the link is shared), and `vendor/lenis.min.js` (smooth scrolling, MIT) |
 | `admin/` | The admin panel (`index.html`, `admin.css`, `admin.js`) |
 | `api/` | Azure Functions (Node 20) |
 | `api/src/lib/default-content.json` | The default content, used until something is saved in the admin panel |
