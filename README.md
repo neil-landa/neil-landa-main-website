@@ -4,7 +4,9 @@ Source for neillanda.com: a static HTML/CSS/JS site on Azure Static Web Apps, wi
 
 ## Editing the site (admin panel)
 
-Go to `/admin/` and sign in with GitHub. Only the GitHub usernames listed in the `ADMIN_USERS` app setting can edit.
+Go to `/admin/` and sign in with Microsoft. Only members of the Entra group **Website Admins** (its object ID is in the `ADMIN_GROUP_ID` app setting) can edit. To give someone access, add them to that group; to remove access, take them out. Changes take effect within five minutes.
+
+Membership is read from Microsoft Graph by the app registration `neillanda-admin-check`, which has the application permissions `GroupMember.Read.All` and `User.ReadBasic.All` (admin consent granted). Its client secret expires two years after it was created (November 2028); create a new one under the app registration and update `ADMIN_CLIENT_SECRET` before then.
 
 | Section | What you can change |
 |---|---|
@@ -30,7 +32,9 @@ Every save also keeps a dated backup copy (the newest 40) in the `sitedata` cont
 | `AZURE_STORAGE_CONNECTION_STRING` | Content, images, and contact messages in the storage account |
 | `BLOB_BASE_URL` | Tells the API which container holds images (`.../mainimgs`) |
 | `SHOW_PORTRAIT` | `true` shows the photo spot in the hero; `false` hides it and shows the large lion instead |
-| `ADMIN_USERS` | Comma-separated GitHub usernames allowed into `/admin/` |
+| `ADMIN_GROUP_ID` | Object ID of the Entra group whose members can use `/admin/`. (Names starting with `WEBSITE_` are reserved by Azure and cannot be used here) |
+| `ADMIN_TENANT_ID`, `ADMIN_CLIENT_ID`, `ADMIN_CLIENT_SECRET` | The `neillanda-admin-check` app registration used to read the group's members |
+| `CF_TURNSTILE_SITEKEY`, `CF_TURNSTILE_SECRET_KEY` | Cloudflare Turnstile on the contact form. The check is shown and enforced only when both are set |
 | `CONTACT_TABLE_NAME` | Optional. Overrides the contact table name (local testing uses `ContactMessagesTest`) |
 | `CONTENT_CONTAINER` | Optional. Overrides the content container name (local testing uses `sitedata-test`) |
 
@@ -53,7 +57,7 @@ After editing `site.css`, `site.js`, or `boot.js`, bump the `?v=N` on their link
 |---|---|---|
 | `GET /api/content` | Public | The saved content plus the `SHOW_PORTRAIT` setting |
 | `GET /api/img/{path}` | Public | Serves images from the private `mainimgs` container |
-| `POST /api/contact` | Public | Saves a contact form message to the `ContactMessages` table. No email is sent |
+| `POST /api/contact` | Public | Verifies the Turnstile check, then saves the message to the `ContactMessages` table. No email is sent |
 | `GET` / `PUT /api/manage/content` | Admin | Load and save the content (`sitedata/content.json`) |
 | `POST /api/manage/upload` | Admin | Upload a logo, portrait, or website screenshot |
 | `GET /api/manage/messages` | Admin | List contact form messages |
@@ -66,4 +70,4 @@ Copy `api/local.settings.sample.json` to `api/local.settings.json`, add the conn
 swa start . --api-location api
 ```
 
-The emulator shows a mock sign-in page at `/admin/`; use the provider `github` and a username from `ADMIN_USERS`.
+The emulator shows a mock sign-in page at `/admin/`; use the provider `aad` and the sign-in email of a group member as the username. The sample settings use Cloudflare's always-pass Turnstile test keys.

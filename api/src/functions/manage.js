@@ -8,7 +8,7 @@ const json = (status, body) => ({ status, jsonBody: body, headers: { 'Cache-Cont
 
 function guarded(handler) {
   return async (request, context) => {
-    const auth = requireAdmin(request);
+    const auth = await requireAdmin(request, context);
     if (auth.response) return auth.response;
     try {
       return await handler(request, context, auth.user);

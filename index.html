@@ -15,9 +15,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/site.css?v=4">
+  <link rel="stylesheet" href="/assets/site.css?v=5">
   <!-- Starts loading the editable content (from /admin/) as early as possible. -->
-  <script src="/assets/boot.js?v=4"></script>
+  <script src="/assets/boot.js?v=5"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -459,6 +459,7 @@
             <label for="cf-website">Leave this field empty</label>
             <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off">
           </div>
+          <div class="field full turnstile-slot" id="cf-turnstile" hidden></div>
           <div class="field full form-foot">
             <button class="btn btn-blue" type="submit"><span data-c="contact.submitLabel">Send message</span> <span class="arrow" aria-hidden="true">→</span></button>
             <p class="form-status" id="cf-status" role="status" aria-live="polite"></p>
@@ -488,6 +489,6 @@
   </footer>
 
   <script src="/assets/vendor/lenis.min.js" defer></script>
-  <script src="/assets/site.js?v=4" defer></script>
+  <script src="/assets/site.js?v=5" defer></script>
 </body>
 </html>

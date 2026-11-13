@@ -547,7 +547,8 @@
       renderMain();
     } catch (err) {
       if (err.status === 401) { location.href = '/login'; return; }
-      if (err.status === 403) return gate('Not allowed', 'The account "' + ((err.data && err.data.user) || 'unknown') + '" is not on the list of people who can edit this site.', true);
+      if (err.status === 403) return gate('Not allowed', 'The Microsoft account "' + ((err.data && err.data.user) || 'unknown') + '" is not in the Website Admins group. ' + ((err.data && err.data.detail) || ''), true);
+      if (err.status === 503) return gate('Admin access is not ready', err.message, true);
       gate('Something went wrong', err.message, false);
     }
   })();

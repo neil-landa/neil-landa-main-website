@@ -304,6 +304,8 @@ html:not(.has-portrait) .hero .lede { font-size: clamp(1.1rem, 1.7vw, 1.45rem); 
 .field .invalid { border-color: #ff7a6b; }
 .field .error { color: #ff9d91; font-size: .84rem; }
 .hint { font-size: .8rem; color: var(--dim); text-align: right; }
+.turnstile-slot { min-height: 65px; }
+.turnstile-slot[hidden] { display: none; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .form-foot { flex-direction: row; align-items: center; flex-wrap: wrap; gap: 16px; }
 .form-status { font-size: .95rem; color: var(--muted); flex: 1; min-width: 200px; }

@@ -8,6 +8,11 @@
     "CONTACT_TABLE_NAME": "ContactMessagesTest",
     "CONTENT_CONTAINER": "sitedata-test",
     "SHOW_PORTRAIT": "false",
-    "ADMIN_USERS": "neil-landa"
+    "ADMIN_TENANT_ID": "<tenant id>",
+    "ADMIN_CLIENT_ID": "<app registration client id>",
+    "ADMIN_CLIENT_SECRET": "<app registration client secret>",
+    "ADMIN_GROUP_ID": "<Entra group object id>",
+    "CF_TURNSTILE_SITEKEY": "1x00000000000000000000AA",
+    "CF_TURNSTILE_SECRET_KEY": "1x0000000000000000000000000000000AA"
   }
 }

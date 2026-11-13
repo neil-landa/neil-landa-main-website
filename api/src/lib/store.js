@@ -98,7 +98,11 @@ async function saveContent(content, savedBy) {
 }
 
 function settings() {
-  return { showPortrait: /^(1|true|yes|on)$/i.test((process.env.SHOW_PORTRAIT || '').trim()) };
+  return {
+    showPortrait: /^(1|true|yes|on)$/i.test((process.env.SHOW_PORTRAIT || '').trim()),
+    // The Turnstile site key is public; the form only shows the check when both keys are set.
+    turnstileSiteKey: process.env.CF_TURNSTILE_SECRET_KEY ? (process.env.CF_TURNSTILE_SITEKEY || '').trim() : ''
+  };
 }
 
 const etagOf = (text) => `"${crypto.createHash('sha1').update(text).digest('hex')}"`;

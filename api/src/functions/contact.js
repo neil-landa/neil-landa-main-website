@@ -21,6 +21,25 @@ function getTable() {
   return tablePromise;
 }
 
+// Cloudflare Turnstile: checked only when both CF_TURNSTILE_* settings are present.
+async function passesTurnstile(token, request, context) {
+  const secret = (process.env.CF_TURNSTILE_SECRET_KEY || '').trim();
+  if (!secret || !(process.env.CF_TURNSTILE_SITEKEY || '').trim()) return true;
+  if (typeof token !== 'string' || !token || token.length > 2048) return false;
+  const form = new URLSearchParams({ secret, response: token });
+  const ip = (request.headers.get('x-forwarded-for') || '').split(',')[0].trim().replace(/:\d+$/, '');
+  if (ip) form.set('remoteip', ip);
+  try {
+    const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', { method: 'POST', body: form, signal: AbortSignal.timeout(10000) });
+    const data = await res.json();
+    if (!data.success) context.warn('turnstile rejected', JSON.stringify(data['error-codes'] || []));
+    return !!data.success;
+  } catch (err) {
+    context.error('turnstile check failed', err.message);
+    return false;
+  }
+}
+
 const json = (status, body) => ({ status, jsonBody: body, headers: { 'Cache-Control': 'no-store' } });
 const clean = (value) => (typeof value === 'string' ? value.replace(CONTROL_CHARS, '').trim() : '');
 
@@ -55,6 +74,10 @@ app.http('contact', {
     if (!SERVICES.includes(entry.service)) return json(400, { error: 'Please choose what you need.' });
     if (!BUDGETS.includes(entry.budget)) return json(400, { error: 'Please choose a budget.' });
     if (entry.message.length < 10) return json(400, { error: 'Please tell me a little about your project.' });
+
+    if (!(await passesTurnstile(body.turnstileToken, request, context))) {
+      return json(400, { error: 'The verification check did not pass. Please try it again.', retryCheck: true });
+    }
 
     const now = new Date();
     try {

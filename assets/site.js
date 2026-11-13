@@ -58,6 +58,7 @@
     var brand = c.brand || {}, hero = c.hero || {}, work = c.work || {}, about = c.about || {};
 
     root.classList.toggle('has-portrait', !!(settings && settings.showPortrait));
+    turnstileKey = (settings && settings.turnstileSiteKey) || '';
 
     // Simple text and link bindings.
     $$('[data-c]').forEach(function (node) {
@@ -245,6 +246,7 @@
      2. Behaviour that must be (re)attached after each render
      ===================================================================== */
   var io = null;
+  var turnstileKey = '';
   var words = [];
   var statement = null;
   var caseCount = 0;
@@ -325,6 +327,41 @@
     caseCount = $$('.case:not(.case-cta)').length;
     measure();
     update();
+    watchTurnstile();
+  }
+
+  /* Cloudflare Turnstile on the contact form. The script loads only when the form comes near the screen. */
+  var turnstileId = null;
+  var turnstileToken = '';
+  var turnstileWatch = null;
+  function mountTurnstile() {
+    var slot = $('#cf-turnstile');
+    if (!slot || !turnstileKey || turnstileId !== null || !window.turnstile) return;
+    slot.hidden = false;
+    turnstileId = window.turnstile.render(slot, {
+      sitekey: turnstileKey, theme: 'dark', size: 'flexible',
+      callback: function (t) { turnstileToken = t; },
+      'expired-callback': function () { turnstileToken = ''; },
+      'error-callback': function () { turnstileToken = ''; }
+    });
+  }
+  function loadTurnstile() {
+    if (!turnstileKey || $('script[data-turnstile]')) return mountTurnstile();
+    var s = document.createElement('script');
+    s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+    s.async = true;
+    s.setAttribute('data-turnstile', '');
+    s.addEventListener('load', mountTurnstile);
+    document.head.appendChild(s);
+  }
+  function watchTurnstile() {
+    var slot = $('#cf-turnstile');
+    if (!slot || !turnstileKey || turnstileId !== null || turnstileWatch) return;
+    if (!('IntersectionObserver' in window)) return loadTurnstile();
+    turnstileWatch = new IntersectionObserver(function (entries) {
+      if (entries.some(function (e) { return e.isIntersecting; })) { turnstileWatch.disconnect(); loadTurnstile(); }
+    }, { rootMargin: '900px 0px' });
+    turnstileWatch.observe($('#contact-form') || slot.parentNode); // the slot itself is hidden until the widget mounts
   }
 
   /* =====================================================================
@@ -602,8 +639,9 @@
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     if (!validate()) { setStatus('Please fix the highlighted fields.', 'err'); return; }
+    if (turnstileKey && !turnstileToken) { loadTurnstile(); setStatus('Please complete the verification check above, then send again.', 'err'); return; }
 
-    var payload = { elapsedMs: Date.now() - loadedAt };
+    var payload = { elapsedMs: Date.now() - loadedAt, turnstileToken: turnstileToken };
     ['name', 'business', 'email', 'phone', 'service', 'budget', 'message', 'website'].forEach(function (name) {
       payload[name] = form.elements[name].value.trim();
     });
@@ -628,6 +666,8 @@
       done.focus({ preventScroll: true });
     }).catch(function (err) {
       button.disabled = false;
+      // A Turnstile token works once, so get a new one before the next try.
+      if (turnstileId !== null && window.turnstile) { turnstileToken = ''; window.turnstile.reset(turnstileId); }
       setStatus(err.message || 'Something went wrong. Please try again.', 'err');
     });
   });

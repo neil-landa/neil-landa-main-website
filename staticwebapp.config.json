@@ -2,10 +2,10 @@
   "trailingSlash": "auto",
   "platform": { "apiRuntime": "node:20" },
   "routes": [
-    { "route": "/.auth/login/aad", "statusCode": 404 },
+    { "route": "/.auth/login/github", "statusCode": 404 },
     { "route": "/.auth/login/twitter", "statusCode": 404 },
     { "route": "/.auth/login/x", "statusCode": 404 },
-    { "route": "/login", "redirect": "/.auth/login/github?post_login_redirect_uri=/admin/", "statusCode": 302 },
+    { "route": "/login", "redirect": "/.auth/login/aad?post_login_redirect_uri=/admin/", "statusCode": 302 },
     { "route": "/logout", "redirect": "/.auth/logout?post_logout_redirect_uri=/", "statusCode": 302 },
     { "route": "/admin", "redirect": "/admin/", "statusCode": 301 },
     { "route": "/admin/*", "allowedRoles": ["authenticated"], "headers": { "Cache-Control": "no-store", "X-Robots-Tag": "noindex, nofollow" } },
@@ -17,7 +17,7 @@
     { "route": "/assets/*", "headers": { "Cache-Control": "public, max-age=0, must-revalidate" } }
   ],
   "responseOverrides": {
-    "401": { "redirect": "/.auth/login/github?post_login_redirect_uri=/admin/", "statusCode": 302 },
+    "401": { "redirect": "/.auth/login/aad?post_login_redirect_uri=/admin/", "statusCode": 302 },
     "404": { "rewrite": "/404.html", "statusCode": 404 }
   },
   "globalHeaders": {
@@ -25,6 +25,6 @@
     "Referrer-Policy": "strict-origin-when-cross-origin",
     "X-Frame-Options": "DENY",
     "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
-    "Content-Security-Policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'self'; frame-ancestors 'none'"
+    "Content-Security-Policy": "default-src 'self'; img-src 'self' data: blob:; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; connect-src 'self'; form-action 'self'; base-uri 'self'; frame-ancestors 'none'"
   }
 }
