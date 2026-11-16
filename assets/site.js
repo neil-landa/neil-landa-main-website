@@ -559,22 +559,31 @@
   }
 
   var pendingFetch = window.__site && typeof window.__site.then === 'function' ? window.__site : Promise.resolve(null);
-  var started = false;
-  var timer = setTimeout(function () {
-    // The API is slow (cold start): show the last known content, update when it arrives.
-    if (started) return;
-    started = true;
-    show(readCache(), false);
-    pendingFetch.then(function (data) { if (data && data.content) { writeCache(data); show(data, true); } });
-  }, 1300);
+  var baked = window.__baked && window.__baked.content ? window.__baked : null;
 
-  pendingFetch.then(function (data) {
-    if (started) return;
-    started = true;
-    clearTimeout(timer);
-    if (data && data.content) { writeCache(data); show(data, false); }
-    else show(readCache(), false);
-  });
+  if (baked) {
+    // The saved content was baked into the page at deploy time: show it right away,
+    // then quietly update if the API has something newer (saved since the last deploy).
+    show(baked, false);
+    pendingFetch.then(function (data) { if (data && data.content) { writeCache(data); show(data, true); } });
+  } else {
+    var started = false;
+    var timer = setTimeout(function () {
+      // The API is slow (cold start): show the last known content, update when it arrives.
+      if (started) return;
+      started = true;
+      show(readCache(), false);
+      pendingFetch.then(function (data) { if (data && data.content) { writeCache(data); show(data, true); } });
+    }, 1300);
+
+    pendingFetch.then(function (data) {
+      if (started) return;
+      started = true;
+      clearTimeout(timer);
+      if (data && data.content) { writeCache(data); show(data, false); }
+      else show(readCache(), false);
+    });
+  }
 
   /* =====================================================================
      5. Contact form

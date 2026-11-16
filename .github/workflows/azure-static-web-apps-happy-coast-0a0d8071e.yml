@@ -8,10 +8,22 @@ on:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
+  # Content saved in /admin/ is baked into assets/content.js at deploy time.
+  # A save triggers a redeploy (repository_dispatch, when GITHUB_DEPLOY_TOKEN is set);
+  # the schedule is a fallback that redeploys only when the saved content changed.
+  repository_dispatch:
+    types: [content-saved]
+  workflow_dispatch:
+  schedule:
+    - cron: "*/10 * * * *"
+
+concurrency:
+  group: deploy-${{ github.event_name == 'pull_request' && github.ref || 'main' }}
+  cancel-in-progress: false
 
 jobs:
   build_and_deploy_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    if: github.event_name != 'pull_request' || github.event.action != 'closed'
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     permissions:
@@ -22,6 +34,12 @@ jobs:
         with:
           submodules: true
           lfs: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Bake saved content
+        id: bake
+        run: node scripts/bake-content.mjs
       - name: Install OIDC Client from Core Package
         run: npm install @actions/core@1.6.0 @actions/http-client
       - name: Get Id Token
@@ -34,6 +52,7 @@ jobs:
            result-encoding: string
       - name: Build And Deploy
         id: builddeploy
+        if: github.event_name != 'schedule' || steps.bake.outputs.changed == 'true'
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_HAPPY_COAST_0A0D8071E }}

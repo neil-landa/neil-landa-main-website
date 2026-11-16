@@ -20,6 +20,26 @@ function guarded(handler) {
 }
 
 /* ---------- Content ---------- */
+// Asks GitHub to redeploy, which bakes the newly saved content into the page
+// (see scripts/bake-content.mjs). Optional: without the token, a scheduled check
+// in the workflow picks up the change within about 10 minutes.
+async function requestRedeploy(context) {
+  const token = process.env.GITHUB_DEPLOY_TOKEN;
+  if (!token) return;
+  const repo = process.env.GITHUB_REPO || 'neil-landa/neil-landa-main-website';
+  try {
+    const res = await fetch(`https://api.github.com/repos/${repo}/dispatches`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'User-Agent': 'neillanda-admin' },
+      body: JSON.stringify({ event_type: 'content-saved' }),
+      signal: AbortSignal.timeout(8000)
+    });
+    if (!res.ok) context.warn(`redeploy request failed: HTTP ${res.status}`);
+  } catch (err) {
+    context.warn('redeploy request failed', err.message);
+  }
+}
+
 app.http('manageContent', {
   methods: ['GET', 'PUT'],
   authLevel: 'anonymous',
@@ -33,6 +53,7 @@ app.http('manageContent', {
     if (!body || typeof body.content !== 'object' || Array.isArray(body.content)) return json(400, { error: 'Invalid content.' });
     const saved = await saveContent(body.content, user);
     context.log(`content saved by ${user}`);
+    await requestRedeploy(context);
     return json(200, { ok: true, content: saved });
   })
 });

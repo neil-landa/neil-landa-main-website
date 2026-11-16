@@ -36,6 +36,7 @@ Every save also keeps a dated backup copy (the newest 40) in the `sitedata` cont
 | `ADMIN_TENANT_ID`, `ADMIN_CLIENT_ID`, `ADMIN_CLIENT_SECRET` | The `neillanda-admin-check` app registration used to read the group's members |
 | `CF_TURNSTILE_SITEKEY`, `CF_TURNSTILE_SECRET_KEY` | Cloudflare Turnstile on the contact form. The check is shown and enforced only when both are set |
 | `CONTACT_TABLE_NAME` | Optional. Overrides the contact table name (local testing uses `ContactMessagesTest`) |
+| `GITHUB_DEPLOY_TOKEN` | Optional. Fine-grained GitHub token for this repo with **Contents: read and write**. When set, saving in the admin panel triggers a redeploy right away; without it, the workflow's 10-minute check redeploys when the saved content changed |
 | `CONTENT_CONTAINER` | Optional. Overrides the content container name (local testing uses `sitedata-test`) |
 
 ## Layout
@@ -48,6 +49,8 @@ Every save also keeps a dated backup copy (the newest 40) in the `sitedata` cont
 | `api/` | Azure Functions (Node 20) |
 | `api/src/lib/default-content.json` | The default content, used until something is saved in the admin panel |
 | `staticwebapp.config.json` | Routes, login rules, security headers, 404 handling |
+
+Saved content is baked into `assets/content.js` at deploy time (`scripts/bake-content.mjs`, run by the workflow), so first-time visitors see the saved text immediately instead of waiting on the API. The committed copy holds `null`; don't hand-edit it.
 
 After editing `site.css`, `site.js`, or `boot.js`, bump the `?v=N` on their links in `index.html` and `404.html`. If you change the default text, change it in both `index.html` and `default-content.json`.
 
