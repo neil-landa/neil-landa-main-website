@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Neil Landa lion mark">
-  <rect width="64" height="64" rx="14" fill="#05060a"/>
-  <g transform="translate(6.4 6.4) scale(.8)">
+  <g>
     <path fill="#e8dcb8" d="M32 1l5 7 8-4 2 8 9-2-2 10 8 4-6 8 5 9-8 3v9l-9-1-4 7-8 4-8-4-4-7-9 1v-9l-8-3 5-9-6-8 8-4-2-10 9 2 2-8 8 4z"/>
     <path fill="#000" fill-opacity=".16" d="M32 1l5 7 8-4 2 8 9-2-2 10 8 4-6 8 5 9-8 3v9l-9-1-4 7-8 4z"/>
     <path fill="#05060a" d="M32 13l9 3 5 9-1 11-5 9-4 6-4 2-4-2-4-6-5-9-1-11 5-9z"/>
